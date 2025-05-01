@@ -1,0 +1,131 @@
+:root {
+    --clr-primary: #a78bfa;
+    --clr-secondary: #f472b6;
+    --clr-white: #ffffff;
+    --clr-text: #1a202c;
+    --clr-text-light: #718096;
+  }
+  
+  /* Arka planda yavaş kayan gradient */
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .authWrapper {
+    min-height: calc(100vh - 132px); /* navbar(72px)+footer(60px) çıkardık */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--clr-primary), var(--clr-secondary), #fbbf24, #10b981);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    overflow-x: hidden;
+    padding: 2rem 1rem;
+  }
+  
+  /* Cam efekti kart */
+  .card {
+    position: relative;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    color: var(--clr-text);
+  }
+  
+  /* Başlık */
+  .title {
+    text-align: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Form grubu ve input wrapper */
+  .formGroup {
+    margin-bottom: 1.25rem;
+  }
+  .inputWrapper {
+    position: relative;
+  }
+  .inputIcon {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    color: var(--clr-text-light);
+    pointer-events: none;
+  }
+  .toggleIcon {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    color: var(--clr-text-light);
+    cursor: pointer;
+  }
+  
+  /* Gerçek input */
+  .input {
+    width: 80%;
+    padding: 0.75rem 2.5rem; /* ikonlar için geniş iç boşluk */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.6);
+    transition: background 0.2s;
+  }
+  .input:focus {
+    outline: none;
+    background: rgba(255,255,255,0.8);
+  }
+  
+  /* Hata mesajı */
+  .error {
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #e53e3e;
+  }
+  
+  /* Buton */
+  .button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--clr-secondary), var(--clr-primary));
+    color: var(--clr-white);
+    border: none;
+    border-radius: 24px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .button:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
+  .button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+  
+  /* Alt switch link */
+  .switchText {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--clr-text-light);
+  }
+  .switchText a {
+    color: var(--clr-secondary);
+    text-decoration: none;
+  }
+  .switchText a:hover {
+    text-decoration: underline;
+  }
+  

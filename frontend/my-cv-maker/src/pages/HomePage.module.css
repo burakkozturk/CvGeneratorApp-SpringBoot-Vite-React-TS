@@ -1,0 +1,58 @@
+/* src/pages/HomePage.module.css */
+.featuresSection {
+    padding: 4rem 0;
+    background: #fff;
+  }
+  .sectionTitle {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  .cards {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+  }
+  .card {
+    flex: 1 1 250px;
+    max-width: 300px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .card h3 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: #444;
+  }
+  .card p {
+    font-size: 0.95rem;
+    color: #666;
+  }
+  .ctaButton {
+    display: inline-block;
+    padding: 0.75rem 2.5rem;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    margin-left: 40%;
+    color: white;
+    border-radius: 24px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  }
+  
