@@ -2,7 +2,8 @@ package cv_maker.main.controller;
 
 import cv_maker.main.dto.CreateEducationRequest;
 import cv_maker.main.dto.EducationResponse;
-import cv_maker.main.service.EducationService;
+import cv_maker.main.repository.UserRepository;
+import cv_maker.main.service.abstracts.EducationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,19 @@ import java.util.UUID;
 public class EducationController {
 
     private final EducationService eduSvc;
-    public EducationController(EducationService eduSvc) {
+    private final UserRepository userRepository;
+
+    public EducationController(EducationService eduSvc, UserRepository userRepository) {
         this.eduSvc = eduSvc;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public ResponseEntity<List<EducationResponse>> list(Authentication auth) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName(); // email geliyor
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         return ResponseEntity.ok(eduSvc.listEducation(userId));
     }
 
@@ -29,7 +36,10 @@ public class EducationController {
     public ResponseEntity<EducationResponse> add(
             Authentication auth,
             @RequestBody CreateEducationRequest req) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         return ResponseEntity.ok(eduSvc.addEducation(userId, req));
     }
 
@@ -37,7 +47,10 @@ public class EducationController {
     public ResponseEntity<Void> delete(
             Authentication auth,
             @PathVariable UUID id) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         eduSvc.deleteEducation(userId, id);
         return ResponseEntity.noContent().build();
     }

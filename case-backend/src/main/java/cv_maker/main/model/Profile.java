@@ -21,6 +21,8 @@ public class Profile {
     private String lastName;
     private LocalDate birthDate;
     private String photoUrl;
+    @Column(columnDefinition = "TEXT")
+    private String summary;
 
     @OneToOne
     @MapsId

@@ -6,6 +6,7 @@ import cv_maker.main.model.Profile;
 import cv_maker.main.model.User;
 import cv_maker.main.repository.ProfileRepository;
 import cv_maker.main.repository.UserRepository;
+import cv_maker.main.service.abstracts.ProfileService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,6 +41,8 @@ public class ProfileServiceImpl implements ProfileService {
         p.setLastName(req.getLastName());
         p.setBirthDate(req.getBirthDate());
         p.setPhotoUrl(req.getPhotoUrl());
+        p.setSummary(req.getSummary());
+
         profileRepo.save(p);
         return map(p);
     }
@@ -50,6 +53,7 @@ public class ProfileServiceImpl implements ProfileService {
                 .firstName(p.getFirstName())
                 .lastName(p.getLastName())
                 .birthDate(p.getBirthDate())
+                .summary(p.getSummary())
                 .photoUrl(p.getPhotoUrl())
                 .build();
     }

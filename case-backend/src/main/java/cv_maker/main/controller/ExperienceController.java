@@ -2,7 +2,8 @@ package cv_maker.main.controller;
 
 import cv_maker.main.dto.CreateExperienceRequest;
 import cv_maker.main.dto.ExperienceResponse;
-import cv_maker.main.service.ExperienceService;
+import cv_maker.main.repository.UserRepository;
+import cv_maker.main.service.abstracts.ExperienceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,19 @@ import java.util.UUID;
 public class ExperienceController {
 
     private final ExperienceService expSvc;
-    public ExperienceController(ExperienceService expSvc) {
+    private final UserRepository userRepository;
+
+    public ExperienceController(ExperienceService expSvc, UserRepository userRepository) {
         this.expSvc = expSvc;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public ResponseEntity<List<ExperienceResponse>> list(Authentication auth) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         return ResponseEntity.ok(expSvc.listExperiences(userId));
     }
 
@@ -29,7 +36,10 @@ public class ExperienceController {
     public ResponseEntity<ExperienceResponse> add(
             Authentication auth,
             @RequestBody CreateExperienceRequest req) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         return ResponseEntity.ok(expSvc.addExperience(userId, req));
     }
 
@@ -37,7 +47,10 @@ public class ExperienceController {
     public ResponseEntity<Void> delete(
             Authentication auth,
             @PathVariable UUID id) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         expSvc.deleteExperience(userId, id);
         return ResponseEntity.noContent().build();
     }

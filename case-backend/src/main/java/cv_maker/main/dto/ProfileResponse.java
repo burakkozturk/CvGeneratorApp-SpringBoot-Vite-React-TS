@@ -15,4 +15,6 @@ public class ProfileResponse {
     private String lastName;
     private LocalDate birthDate;
     private String photoUrl;
+    private String summary;
+
 }

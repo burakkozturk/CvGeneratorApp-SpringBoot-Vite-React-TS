@@ -1,4 +1,4 @@
-import axios from './axios'; // kendi axios instance'ını kullan
+import axios from 'axios';
 
 export interface LoginRequest {
   email: string;

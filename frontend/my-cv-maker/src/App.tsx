@@ -8,7 +8,7 @@ import { Footer } from './components/Footer/Footer';
 import { HomePage } from './pages/HomePage';
 import LoginPage from './features/auth/LoginPage';
 import RegisterPage from './features/auth/RegisterPage';
-import TemplatesPage from './pages/TemplatesPage';
+import TemplatesPage from './pages/TemplatesPage.tsx';
 
 function App() {
   return (

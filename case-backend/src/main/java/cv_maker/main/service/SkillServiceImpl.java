@@ -6,6 +6,7 @@ import cv_maker.main.model.Skill;
 import cv_maker.main.model.User;
 import cv_maker.main.repository.SkillRepository;
 import cv_maker.main.repository.UserRepository;
+import cv_maker.main.service.abstracts.SkillService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

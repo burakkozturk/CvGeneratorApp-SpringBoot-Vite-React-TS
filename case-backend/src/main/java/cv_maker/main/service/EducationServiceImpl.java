@@ -6,6 +6,7 @@ import cv_maker.main.model.Education;
 import cv_maker.main.model.User;
 import cv_maker.main.repository.EducationRepository;
 import cv_maker.main.repository.UserRepository;
+import cv_maker.main.service.abstracts.EducationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

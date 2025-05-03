@@ -1,8 +1,8 @@
 package cv_maker.main.service;
 
 import cv_maker.main.dto.TemplateResponse;
-import cv_maker.main.model.Template;
 import cv_maker.main.repository.TemplateRepository;
+import cv_maker.main.service.abstracts.TemplateService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

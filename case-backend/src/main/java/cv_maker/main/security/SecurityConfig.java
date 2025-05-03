@@ -22,11 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
-
     private final AuthService userService;
-
     private final PasswordEncoder passwordEncoder;
-
 
     public SecurityConfig(JwtAuthFilter jwtAuthFilter, AuthService userService, PasswordEncoder passwordEncoder) {
         this.jwtAuthFilter = jwtAuthFilter;
@@ -38,18 +35,22 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(x ->
-                        x.requestMatchers("/auth/register/**", "/auth/authenticate/**"
-                                ,"/api/product/**","/api/verification/**").permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/auth/register/**",
+                                "/auth/authenticate/**",
+                                "/api/product/**",
+                                "/api/verification/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                "/api/profile/**",
+                                "/api/wishlist/**",
+                                "/auth/user"
+                        ).authenticated()
+                        .requestMatchers("/api/rate-limit/**").hasRole("ADMIN")
+                        .anyRequest().permitAll() // diğer tüm istekler açık (dilersen kaldırabilirsin)
                 )
-                .authorizeHttpRequests(x ->
-                        x.requestMatchers("/api/wishlist/**").authenticated()
-                )
-                .authorizeHttpRequests(x ->
-                        x.requestMatchers("/auth/user").authenticated()
-                                .requestMatchers("/api/rate-limit/**").hasRole("ADMIN")
-                )
-                .sessionManagement(x -> x.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -57,15 +58,14 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
-        return authenticationProvider;
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userService);
+        authProvider.setPasswordEncoder(passwordEncoder);
+        return authProvider;
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 }

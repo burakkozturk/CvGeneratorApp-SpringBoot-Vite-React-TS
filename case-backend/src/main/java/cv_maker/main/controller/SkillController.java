@@ -2,7 +2,8 @@ package cv_maker.main.controller;
 
 import cv_maker.main.dto.CreateSkillRequest;
 import cv_maker.main.dto.SkillResponse;
-import cv_maker.main.service.SkillService;
+import cv_maker.main.repository.UserRepository;
+import cv_maker.main.service.abstracts.SkillService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,19 @@ import java.util.UUID;
 public class SkillController {
 
     private final SkillService skillSvc;
-    public SkillController(SkillService skillSvc) {
+    private final UserRepository userRepository;
+
+    public SkillController(SkillService skillSvc, UserRepository userRepository) {
         this.skillSvc = skillSvc;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
     public ResponseEntity<List<SkillResponse>> list(Authentication auth) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         return ResponseEntity.ok(skillSvc.listSkills(userId));
     }
 
@@ -29,7 +36,10 @@ public class SkillController {
     public ResponseEntity<SkillResponse> add(
             Authentication auth,
             @RequestBody CreateSkillRequest req) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         return ResponseEntity.ok(skillSvc.addSkill(userId, req));
     }
 
@@ -37,7 +47,10 @@ public class SkillController {
     public ResponseEntity<Void> delete(
             Authentication auth,
             @PathVariable UUID id) {
-        UUID userId = UUID.fromString(auth.getName());
+        String email = auth.getName();
+        UUID userId = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"))
+                .getId();
         skillSvc.deleteSkill(userId, id);
         return ResponseEntity.noContent().build();
     }

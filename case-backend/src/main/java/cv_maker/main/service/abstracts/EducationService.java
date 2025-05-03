@@ -1,4 +1,4 @@
-package cv_maker.main.service;
+package cv_maker.main.service.abstracts;
 
 import cv_maker.main.dto.CreateEducationRequest;
 import cv_maker.main.dto.EducationResponse;

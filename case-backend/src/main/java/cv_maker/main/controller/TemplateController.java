@@ -1,7 +1,7 @@
 package cv_maker.main.controller;
 
 import cv_maker.main.dto.TemplateResponse;
-import cv_maker.main.service.TemplateService;
+import cv_maker.main.service.abstracts.TemplateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

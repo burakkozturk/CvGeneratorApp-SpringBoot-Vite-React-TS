@@ -55,5 +55,12 @@ public class User implements UserDetails {
         return email;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                '}';
+    }
     // (Diğer UserDetails metotları lombok veri­sinden geliyor)
 }
