@@ -1,0 +1,91 @@
+/* Template3.module.css */
+
+.templateContainer {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    display: flex;
+    background: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .sidebar {
+    width: 30%;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20mm 10mm;
+    text-align: center;
+  }
+  
+  .photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #ffffff44;
+    margin-bottom: 20px;
+  }
+  
+  .name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .email,
+  .birthDate {
+    font-size: 12px;
+    color: #cccccc;
+    margin-top: 6px;
+  }
+  
+  .socialLinks {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .socialLinks a {
+    color: #dddddd;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .socialLinks a:hover {
+    color: #ffffff;
+  }
+  
+  .content {
+    width: 70%;
+    padding: 20mm 25mm;
+    color: #333;
+  }
+  
+  .section {
+    margin-bottom: 24px;
+  }
+  
+  .section h2 {
+    font-size: 16px;
+    border-bottom: 2px solid #444;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    color: #1a1a1a;
+  }
+  
+  .section p,
+  .section ul {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 4px 0;
+  }
+  
+  .section ul {
+    list-style: square;
+    padding-left: 20px;
+  }
+  

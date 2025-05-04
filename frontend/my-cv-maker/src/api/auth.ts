@@ -1,21 +1,21 @@
-import axios from 'axios';
+import axios from 'axios'; // <- kendi instance yerine düz axios
 
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
+const AUTH_BASE_URL = 'https://cvcim.xyz/auth'; // ✅ doğrudan base
 
 export interface RegisterRequest {
   email: string;
   password: string;
 }
 
-export interface AuthResponse {
-  token: string;
+export interface LoginRequest {
+  email: string;
+  password: string;
 }
 
-export const login = (data: LoginRequest) =>
-  axios.post<AuthResponse>('/auth/login', data);
+export const login = (data: LoginRequest) => {
+  return axios.post(`${AUTH_BASE_URL}/authenticate`, data); // ✅
+};
 
-export const registerUser = (data: RegisterRequest) =>
-  axios.post<AuthResponse>('/auth/register', data);
+export const registerUser = (data: RegisterRequest) => {
+  return axios.post(`${AUTH_BASE_URL}/register`, data); // ✅
+};

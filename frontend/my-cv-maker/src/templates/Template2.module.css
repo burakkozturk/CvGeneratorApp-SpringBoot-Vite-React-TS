@@ -1,0 +1,88 @@
+.templateContainer {
+    width: 21cm;
+    height: 29.7cm;
+    padding: 2cm;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    font-family: 'Arial', sans-serif;
+    font-size: 12pt;
+    box-sizing: border-box;
+  }
+  
+  .leftColumn {
+    width: 35%;
+    padding-right: 1cm;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .rightColumn {
+    width: 65%;
+    padding-left: 1cm;
+    box-sizing: border-box;
+  }
+  
+  .profilePhoto {
+    width: 6cm;
+    height: 6cm;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .contact {
+    font-size: 10pt;
+    color: #333;
+    margin: 0.25rem 0;
+  }
+  
+  .summary {
+    margin-top: 1rem;
+    text-align: left;
+  }
+  
+  .summary h4 {
+    margin-bottom: 0.5rem;
+    font-size: 12pt;
+  }
+  
+  .summary p {
+    font-size: 11pt;
+    color: #444;
+  }
+  
+  .item {
+    margin-bottom: 1rem;
+  }
+  
+  .itemTitle {
+    font-weight: bold;
+    font-size: 12pt;
+  }
+  
+  .itemSubtitle {
+    font-size: 10pt;
+    color: #555;
+  }
+  
+  .itemDesc {
+    font-size: 10pt;
+    color: #333;
+    margin-top: 0.25rem;
+  }
+  
+  ul {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+  
+  li {
+    margin-bottom: 0.3rem;
+  }
+  

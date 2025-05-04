@@ -13,12 +13,20 @@ const LoginPage: React.FC = () => {
   const onSubmit = async (data: LoginRequest) => {
     try {
       const res = await login(data);
-      localStorage.setItem('token', res.data.token);
-      navigate('/templates');
+      const token = res.data; // <-- burada `res.data.token` değil, doğrudan `res.data`
+      if (!token) {
+        alert('Sunucudan geçerli bir token dönmedi.');
+        return;
+      }
+      console.log("Giriş sonrası token:", token);
+      localStorage.setItem('token', token);
+      navigate('/');
     } catch (err: any) {
       alert(err.response?.data?.message || 'Giriş başarısız');
     }
   };
+  
+  
 
   return (
     <div className={styles.authWrapper}>

@@ -19,9 +19,9 @@ const RegisterPage: React.FC = () => {
       return alert('Şifreler eşleşmiyor');
     }
     try {
-      const res = await registerUser({ email: data.email, password: data.password });
-      localStorage.setItem('token', res.data.token);
-      navigate('/templates');
+      await registerUser({ email: data.email, password: data.password });
+      alert('Kayıt başarılı! Şimdi giriş yapabilirsiniz.');
+      navigate('/login'); // ✅ Sadece login sayfasına yönlendiriyoruz
     } catch (err: any) {
       alert(err.response?.data?.message || 'Kayıt başarısız');
     }

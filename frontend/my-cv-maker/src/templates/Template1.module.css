@@ -1,0 +1,74 @@
+.templateContainer {
+    width: 210mm;
+    min-height: 297mm;
+    padding: 30mm 20mm;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .profilePhoto {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+  
+  .nameSection {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .contact {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  .section {
+    margin-top: 24px;
+  }
+  
+  .section h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+  }
+  
+  .item {
+    margin-bottom: 12px;
+  }
+  
+  .itemTitle {
+    font-weight: 600;
+  }
+  
+  .itemSubtitle {
+    font-size: 13px;
+    color: #555;
+    margin: 2px 0;
+  }
+  
+  .itemDesc {
+    font-size: 14px;
+    color: #333;
+  }
+  

@@ -1,0 +1,120 @@
+.profileSummaryContainer {
+    padding: 2rem;
+  }
+  
+  .profileGrid {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .profileImageContainer {
+    flex: 0 0 150px;
+  }
+  
+  .profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #6366f1;
+  }
+  
+  .profileInfo {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+  }
+  .editButton {
+    margin-top: 1rem;
+    padding: 0.7rem 1.2rem;
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .editButton:hover {
+    background: linear-gradient(to right, #4f46e5, #7c3aed);
+  }
+  
+  /* Yeni ana konteyner */
+.profilePageContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 2rem;
+  }
+  
+  /* Sol ana içerik (form veya view) */
+  .mainContent {
+    flex: 1;
+    max-width: 720px;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Sağ sidebar */
+  .sidebar {
+    flex-shrink: 0;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Panel görünümü artık kart gibi */
+  .panel {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .panelHeader {
+    width: 100%;
+    text-align: left;
+    background-color: #6366f1;
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+  }
+  
+  .panelContent {
+    background-color: #f9fafb;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+  }
+  
+  /* Mobil görünüm */
+  @media (max-width: 768px) {
+    .profilePageContainer {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+    }
+  }
+  

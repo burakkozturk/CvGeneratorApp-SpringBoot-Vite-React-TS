@@ -1,0 +1,36 @@
+.sidebar {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 260px;
+    background: #fff;
+    border-left: 2px solid #eee;
+    padding: 1rem;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+  }
+  
+  .panel {
+    margin-bottom: 1rem;
+  }
+  
+  .panelHeader {
+    width: 100%;
+    text-align: left;
+    background-color: #6366f1;
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .panelContent {
+    margin-top: 0.5rem;
+    padding: 0.8rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+  }
+  
