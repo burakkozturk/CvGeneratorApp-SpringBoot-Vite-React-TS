@@ -1,0 +1,92 @@
+/* src/components/ProfileForm/SkillsForm.module.css */
+
+.wrapper {
+    padding: 1rem;
+  }
+  .title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+  }
+  .error {
+    color: #dc2626;
+    margin-bottom: 0.5rem;
+  }
+  .form {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+  .form input,
+  .form select {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.6rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+  }
+  .form button {
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+  }
+  .form button:hover {
+    transform: translateY(-1px);
+  }
+  
+  .list {
+    display: grid;
+    gap: 1rem;
+  }
+  .card {
+    position: relative;
+    background: #fff;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .cardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .icon {
+    color: #4f46e5;
+    font-size: 1.3rem;
+  }
+  .name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    color: #111827;
+  }
+  .level {
+    font-size: 0.85rem;
+    color: #6b7280;
+  }
+  .deleteBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 1.1rem;
+  }
+  
+  @media (min-width: 640px) {
+    .list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  

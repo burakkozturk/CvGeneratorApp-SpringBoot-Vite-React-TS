@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../api/axios';
 import styles from './ProfileForm.module.css';
+import { FiSave, FiUser, FiUpload } from 'react-icons/fi';
 
 interface ProfileFormProps {
   token: string;
+  existingProfile?: ProfileData;
+  onSuccess?: () => void;
 }
 
-const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
-  const [form, setForm] = useState({
+interface ProfileData {
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  photoUrl: string;
+  summary: string;
+}
+
+const ProfileForm: React.FC<ProfileFormProps> = ({ token, existingProfile, onSuccess }) => {
+  const [form, setForm] = useState<ProfileData>({
     firstName: '',
     lastName: '',
     birthDate: '',
@@ -18,9 +29,17 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [fileSelected, setFileSelected] = useState(false);
 
-  // API endpoint'lerini proxy ile kullanacak şekilde güncelleme
-  const API_URL = '/api'; // Vite proxy ile /api yolunu cvcim.xyz'ye yönlendireceğiz
+  // Load existing profile data if available
+  useEffect(() => {
+    if (existingProfile) {
+      setForm(existingProfile);
+    }
+  }, [existingProfile]);
+
+  // API endpoint
+  const API_URL = '/api';
   
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -28,11 +47,11 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
     
     setIsLoading(true);
     setErrorMessage('');
+    setFileSelected(true);
     const formData = new FormData();
     formData.append("file", file);
     
     try {
-      // Dosya yükleme için yeni endpoint
       const res = await axios.post('/files/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -43,12 +62,10 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
       const imageUrl = res.data.url;
       setForm(prev => ({ ...prev, photoUrl: imageUrl }));
       setSuccessMessage("Fotoğraf başarıyla yüklendi!");
-      
-      // 3 saniye sonra mesajı temizle
       setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
       console.error("Fotoğraf yükleme hatası:", err);
-      setErrorMessage("Fotoğraf yüklenemedi. CORS hatası oluşabilir.");
+      setErrorMessage("Fotoğraf yüklenemedi. Lütfen tekrar deneyin.");
     } finally {
       setIsLoading(false);
     }
@@ -65,7 +82,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
     setErrorMessage('');
     
     try {
-      // Profil güncellemesi için yeni endpoint
       await axios.post('/profile', form, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -74,31 +90,27 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
       
       setSuccessMessage("Profil bilgileriniz başarıyla kaydedildi!");
       
-      // 3 saniye sonra mesajı temizle
-      setTimeout(() => setSuccessMessage(''), 3000);
+      if (onSuccess) {
+        setTimeout(() => {
+          onSuccess();
+        }, 2000);
+      } else {
+        setTimeout(() => setSuccessMessage(''), 3000);
+      }
     } catch (err) {
       console.error("Profil kaydetme hatası:", err);
-      setErrorMessage("Profil kaydedilemedi. CORS hatası oluşabilir.");
+      setErrorMessage("Profil kaydedilemedi. Lütfen daha sonra tekrar deneyin.");
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Hata durumunda görünecek bileşen
   const ErrorMessage = () => {
     if (!errorMessage) return null;
     
     return (
       <div className={styles.errorMessage}>
         <p>{errorMessage}</p>
-        <p className={styles.errorTip}>
-          <strong>Önerilen Çözümler:</strong>
-          <ul>
-            <li>Vite proxy yapılandırması ekleyin (vite.config.js dosyasında)</li>
-            <li>API sunucunuz CORS başlıklarını doğru ayarlamalıdır</li>
-            <li>Yerel geliştirme için CORS proxy kullanabilirsiniz</li>
-          </ul>
-        </p>
       </div>
     );
   };
@@ -148,7 +160,8 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
           <div className={styles.fileInputContainer}>
             <label htmlFor="photo" className={styles.photoLabel}>Profil Fotoğrafı</label>
             <label className={styles.customFileInput}>
-              Fotoğraf Seç
+              <FiUpload size={18} />
+              {fileSelected ? "Fotoğraf Seçildi" : "Fotoğraf Seç"}
               <input 
                 id="photo" 
                 type="file" 
@@ -162,7 +175,6 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
 
         {form.photoUrl && (
           <div className={styles.photoPreviewContainer + ' ' + styles.fullWidth}>
-            <label>Yüklenen Fotoğraf</label>
             <img 
               src={form.photoUrl} 
               alt="Profil" 
@@ -189,7 +201,14 @@ const ProfileForm: React.FC<ProfileFormProps> = ({ token }) => {
         className={styles.submitButton} 
         disabled={isLoading}
       >
-        {isLoading ? 'İşleniyor...' : 'Profili Kaydet'}
+        {isLoading ? (
+          <>İşleniyor...</>
+        ) : (
+          <>
+            <FiSave size={18} />
+            Profili Kaydet
+          </>
+        )}
       </button>
       
       {successMessage && (

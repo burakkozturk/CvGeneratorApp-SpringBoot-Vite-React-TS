@@ -17,6 +17,13 @@ const Template1: React.FC<Props> = ({ data }) => {
             className={styles.profilePhoto}
           />
         )}
+        <img
+          src={data.profile.photoUrl}
+          alt="Profile"
+          className={styles.profilePhoto}
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
         <div className={styles.headerText}>
           <h1>
             {data.profile.firstName} {data.profile.lastName}
